@@ -83,7 +83,7 @@ class Movie
             if ($quote->getMovie() === $this) {
                 $quote->setMovie(null);
             }
-        }
+        } 
 
         return $this;
     }

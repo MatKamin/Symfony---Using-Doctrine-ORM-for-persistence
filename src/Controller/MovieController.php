@@ -21,6 +21,18 @@ class MovieController extends AbstractController
         ]);
     }
 
+    #[Route('/search/{searchQuery}', name: 'app_movie_search', methods: ['GET'])]
+    public function search(String $searchQuery, MovieRepository $movieRepository): Response
+    {
+        return $this->render('movie/search.html.twig', [
+            'movies' => $movieRepository->findByName(
+                ['name' => $searchQuery],
+                ['releaseYear' => 'ASC']
+            ),
+        ]);
+    }
+
+
     #[Route('/new', name: 'app_movie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, MovieRepository $movieRepository): Response
     {
@@ -75,4 +87,6 @@ class MovieController extends AbstractController
 
         return $this->redirectToRoute('app_movie_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
 }

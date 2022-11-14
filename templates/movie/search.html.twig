@@ -3,8 +3,9 @@
 {% block title %}Movie index{% endblock %}
 
 {% block body %}
-    <h1>Movie List</h1>
+    <h1>Searched Movie List</h1>
 
+    
 
     <table class="table">
         <thead>
@@ -22,7 +23,6 @@
                 <td>{{ movie.name }}</td>
                 <td>{{ movie.releaseYear }}</td>
                 <td>
-                    <a href="{{ path('app_movie_search', {'searchQuery': movie.name}) }}">search</a>
                     <a href="{{ path('app_movie_show', {'id': movie.id}) }}">show</a>
                     <a href="{{ path('app_movie_edit', {'id': movie.id}) }}">edit</a>
                 </td>
