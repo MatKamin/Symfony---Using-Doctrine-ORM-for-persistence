@@ -3,37 +3,41 @@
 {% block title %}Movie index{% endblock %}
 
 {% block body %}
+<section class="max-container">
     <h1>Searched Movie List</h1>
+</section>
 
-    
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>ReleaseYear</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for movie in movies %}
-            <tr>
-                <td>{{ movie.id }}</td>
-                <td>{{ movie.name }}</td>
-                <td>{{ movie.releaseYear }}</td>
-                <td>
-                    <a href="{{ path('app_movie_show', {'id': movie.id}) }}">show</a>
-                    <a href="{{ path('app_movie_edit', {'id': movie.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+{% for movie in movies %}
+<section class="max-container">
+    <article>
+        <p>
+            {{ movie.id }}
+        </p>
+        <p>
+            {{ movie.name }}
+        </p>
+        <p>
+            {{ movie.releaseYear }} 
+        </p>
+        <div class="link-box">
+            <a href="{{ path('app_movie_show', {'id': movie.id}) }}">show</a>
+            <a href="{{ path('app_movie_edit', {'id': movie.id}) }}">edit</a>
+        </div>
+    </article>
+    <ul>
+        {% for quote in movie.getQuotes %}
+        <li>
+            {{quote}} ~ {{quote.getAuthor()}}
+        </li>
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_movie_new') }}">Create new</a>
+        
+    </ul>
+</section>
+{% else %}
+<section class="max-container">
+    <h2>
+        Couldn't find movie....
+    </h2>
+</section>
+{% endfor %}
 {% endblock %}

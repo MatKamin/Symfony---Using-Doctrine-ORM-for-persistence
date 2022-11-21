@@ -21,8 +21,16 @@ class MovieController extends AbstractController
         ]);
     }
 
-    #[Route('/search/{searchQuery}', name: 'app_movie_search', methods: ['GET'])]
-    public function search(String $searchQuery, MovieRepository $movieRepository): Response
+    #[Route('/search/', name: 'app_movie_search', methods: ['GET'])]
+    public function search(MovieRepository $movieRepository): Response
+    {
+        return $this->render('movie/search.html.twig', [
+            'movies' => $movieRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/search/{searchQuery}', name: 'app_movie_search_term', methods: ['GET'])]
+    public function searchTerm(String $searchQuery, MovieRepository $movieRepository): Response
     {
         return $this->render('movie/search.html.twig', [
             'movies' => $movieRepository->findByName(
@@ -81,12 +89,10 @@ class MovieController extends AbstractController
     #[Route('/{id}', name: 'app_movie_delete', methods: ['POST'])]
     public function delete(Request $request, Movie $movie, MovieRepository $movieRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$movie->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $movie->getId(), $request->request->get('_token'))) {
             $movieRepository->remove($movie, true);
         }
 
         return $this->redirectToRoute('app_movie_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    
 }
