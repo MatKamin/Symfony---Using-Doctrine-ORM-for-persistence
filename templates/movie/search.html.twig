@@ -7,6 +7,10 @@
     <h1>Searched Movie List</h1>
 </section>
 
+<section class="max-container">
+    {{ include('movie/_search_form.html.twig') }}
+</section>
+
 {% for movie in movies %}
 <section class="max-container">
     <article>

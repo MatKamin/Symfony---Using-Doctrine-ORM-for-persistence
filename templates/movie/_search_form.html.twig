@@ -1,3 +1,14 @@
-<form method="get" action="{{ path('app_movie_search_term', {'searchQuery': searchQuery}) }}">
-    <button class="btn">Search</button>
+<form method="get" id="form">
+    <input type="text" placeholder="Star Wars..." id="search">
+    <button class="btn" type="submit">Search</button>
 </form>
+
+<script>
+    let form = document.getElementById('form')
+        form.addEventListener('submit', search)
+
+    function search(ev) {
+        ev.preventDefault()
+        window.location = '/movie/search/' + document.getElementById('search').value
+    }
+</script>
