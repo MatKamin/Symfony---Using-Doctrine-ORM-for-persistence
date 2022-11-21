@@ -44,13 +44,14 @@ class MovieRepository extends ServiceEntityRepository
      */
     public function findByName($value): array
     {
-        return $this->createQueryBuilder('m')
-                    ->andWhere('m.name = :val')
-                    ->setParameter('val', $value)
-                    ->orderBy('m.name', 'ASC')
-                    ->setMaxResults(1)
-                    ->getQuery()
-                    ->getResult()
+        $term = '%'.$value['name'].'%';
+        $qb = $this->createQueryBuilder('m');
+
+        return $qb->where($qb->expr()->like('m.name', ':val'))
+           ->setParameter('val', $term)
+           ->orderBy('m.name', 'ASC')
+           ->getQuery()
+           ->getResult()
         ;
     }
 
