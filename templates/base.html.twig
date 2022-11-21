@@ -12,12 +12,23 @@
 
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
+
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <h1>The Die Hards</h1>
+            <aside>
+                <a href="{{ path('app_movie_new') }}">new movie</a>
+                <a href="{{ path('app_quote_new') }}">new quote</a>
+                <a href="">search</a>
+            </aside>
+        </header>
+        <main>
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>
