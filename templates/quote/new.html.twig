@@ -3,9 +3,15 @@
 {% block title %}New Quote{% endblock %}
 
 {% block body %}
+<section class="max-container">
     <h1>Create new Quote</h1>
+
+    <br><br>
 
     {{ include('quote/_form.html.twig') }}
 
+    <br><br>
+    
     <a href="{{ path('app_quote_index') }}">back to list</a>
+</section>
 {% endblock %}
