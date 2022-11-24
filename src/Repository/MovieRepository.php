@@ -44,24 +44,32 @@ class MovieRepository extends ServiceEntityRepository
      */
     public function findByName($value): array
     {
-        $term = '%'.$value['name'].'%';
+        $term = '%' . $value['name'] . '%';
         $qb = $this->createQueryBuilder('m');
 
         return $qb->where($qb->expr()->like('m.name', ':val'))
-           ->setParameter('val', $term)
-           ->orderBy('m.name', 'ASC')
-           ->getQuery()
-           ->getResult()
-        ;
+            ->setParameter('val', $term)
+            ->orderBy('m.name', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
-//    public function findOneBySomeField($value): ?Movie
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @return Movie[] Returns an array of Movie objects
+     */
+    public function getRandom()
+    {
+        $qb = $this->createQueryBuilder('m');
+        return $qb->orderBy('RAND()')->getQuery()->setMaxResults(1)->getResult();
+    }
+
+    //    public function findOneBySomeField($value): ?Movie
+    //    {
+    //        return $this->createQueryBuilder('m')
+    //            ->andWhere('m.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

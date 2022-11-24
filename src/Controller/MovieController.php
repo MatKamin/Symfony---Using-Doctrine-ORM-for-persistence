@@ -21,11 +21,20 @@ class MovieController extends AbstractController
         ]);
     }
 
-    #[Route('/search/', name: 'app_movie_search', methods: ['GET'])]
+    #[Route('/search', name: 'app_movie_search', methods: ['GET'])]
     public function search(MovieRepository $movieRepository): Response
     {
         return $this->render('movie/search.html.twig', [
             'movies' => $movieRepository->findAll(),
+        ]);
+    }
+
+
+    #[Route('/random', name: 'app_random_movie', methods: ['GET'])]
+    public function randomMovie(MovieRepository $movieRepository): Response
+    {
+        return $this->render('movie/index.html.twig', [
+            'movies' => $movieRepository->getRandom(),
         ]);
     }
 
